@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/prop-types.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+    //方式1
+    class Person extends React.Component {
+        constructor(props) {
+            super(props)
+        }
+
+        render() {
+            return (
+                <ul>
+                    <li>Name:{this.props.Name}</li>
+                    <li>Age:{this.props.Age}</li>
+                    <li>Sex:{this.props.Sex}</li>
+                </ul>
+            )
+        }
+    }
+
+    //方式2
+    // function Person(props) {
+    //     return (
+    //         <ul>
+    //             <li>Name:{props.Name}</li>
+    //             <li>Age:{props.Age}</li>
+    //             <li>Sex:{props.Sex}</li>
+    //         </ul>
+    //     )
+    // }
+
+    Person.defaultProps = {
+        Age: 20,
+        Sex: '女'
+    };
+    Person.propTypes = {
+        Name: PropTypes.string.isRequired,
+        Age: PropTypes.number.isRequired,
+    };
+    const p1 = {
+        Name: "Zhangsan",
+        Age: 18,
+        Sex: "男",
+    };
+    ReactDOM.render(<Person {...p1}/>, document.getElementById("test1"));
+    const p2 = {
+        Name: "Lisi",
+    };
+    ReactDOM.render(<Person {...p2}/>, document.getElementById("test2"));
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/prop-types.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+    class LoginForm extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                pwd: ''
+            };
+
+            this.handlerSubmit = this.handlerSubmit.bind(this)
+            this.handlerChangePwd = this.handlerChangePwd.bind(this)
+        }
+
+        handlerChangePwd(event) {
+            this.setState({pwd: event.target.value})
+        }
+
+        handlerSubmit(event) {
+            event.preventDefault();
+            alert(`Username is ${this.usernameInput.value},password is ${this.state.pwd}`);
+        }
+
+        render() {
+            return (
+                <form action="/test" onSubmit={this.handlerSubmit}>
+                    Username: <input type="text" ref={input => this.usernameInput = input}/>
+                    Password: <input type="password" value={this.state.pwd} onChange={this.handlerChangePwd}/>
+                    <input type="submit" value="Login"/>
+                </form>
+            )
+        }
+
+    }
+
+    ReactDOM.render(
+        <LoginForm/>
+        , document.getElementById("test1"))
+</script>
+</body>
+</html>

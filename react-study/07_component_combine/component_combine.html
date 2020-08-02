@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/prop-types.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                todos: ['吃饭', '睡觉', '打豆豆']
+            };
+            this.add = this.add.bind(this);
+        }
+
+        add(item) {
+            const todos = this.state.todos;
+            todos.unshift(item)
+            this.setState(
+                {
+                    todos: todos
+                }
+            )
+        }
+
+        render() {
+            const todos = this.state.todos;
+            return (
+                <div>
+                    <h1>随便添加点啥</h1>
+                    <Add len={todos.length} addFunc={this.add}/>
+                    <List todos={todos}/>
+                </div>
+
+            )
+        }
+    }
+
+    class Add extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.handlerClick = this.handlerClick.bind(this);
+        }
+
+
+        handlerClick() {
+            const value = this.input.value;
+            if (!value) {
+                return
+            }
+            this.props.addFunc(value);
+            this.input.value = ""
+        }
+
+        render() {
+            return (
+                <div>
+                    <input type="text" ref={input => this.input = input}/>
+                    <button onClick={this.handlerClick}>Add #{this.props.len + 1}</button>
+                </div>
+            )
+        }
+    }
+
+    Add.propsTypes = {
+        addFunc: PropTypes.func.isRequired
+    };
+
+    class List extends React.Component {
+        render() {
+            return (
+                <ul>
+                    {
+                        this.props.todos.map(function (item, index) {
+                            return (
+                                <li key={index}>{item}</li>
+                            )
+                        })
+                    }
+                </ul>
+            )
+        }
+    }
+
+    List.propTypes = {
+        todos: PropTypes.array.isRequired
+    };
+
+    ReactDOM.render(<App/>, document.getElementById("test1"))
+</script>
+</body>
+</html>

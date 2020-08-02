@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/prop-types.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+    class Life extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                opacity: 1
+            }
+            this.destroyComponent = this.destroyComponent.bind(this);
+            this.componentWillUnmount = this.componentWillUnmount.bind(this);
+        }
+
+        componentDidMount() {
+            this.interval = setInterval(function () {
+                console.log(11);
+                let {opacity} = this.state;
+                opacity -= 0.1;
+                if (opacity <= 0) {
+                    opacity = 1
+                }
+                this.setState({opacity})
+
+            }.bind(this), 200)
+        }
+
+        componentWillUnmount() {
+            clearInterval(this.interval);
+        }
+
+
+        destroyComponent() {
+            ReactDOM.unmountComponentAtNode(document.getElementById("test1"))
+        }
+
+        render() {
+            const {opacity} = this.state
+            return (
+                <div>
+                    <h2 style={{opacity}}>React 太难了</h2>
+                    <button onClick={this.destroyComponent}>大峰不活了</button>
+                </div>
+            )
+        }
+
+    }
+
+    ReactDOM.render(
+        <Life/>
+        , document.getElementById("test1"))
+</script>
+</body>
+</html>

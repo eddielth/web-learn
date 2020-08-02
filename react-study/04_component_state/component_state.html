@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+
+    class MyComponent extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                flag: false
+            }
+            this.handlerClick = this.handlerClick.bind(this)
+        }
+
+        handlerClick() {
+            this.setState(
+                {
+                    flag: !this.state.flag
+                }
+            )
+        }
+
+        render() {
+            return <h2 onClick={this.handlerClick}>{this.state.flag ? "How Are You?" : "Fine Thanks ,And U?"}</h2>
+        }
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById("test1"));
+</script>
+</body>
+</html>

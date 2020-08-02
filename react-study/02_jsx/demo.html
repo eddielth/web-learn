@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+    const names = ['A', 'B', 'C', 'D', 'E'];
+    const ul = (<ul>
+        {
+            names.map(function (value, index) {
+                return <li key={index}>{value}</li>
+            })
+        }
+
+    </ul>);
+    ReactDOM.render(ul, document.getElementById("test1"));
+</script>
+</body>
+</html>

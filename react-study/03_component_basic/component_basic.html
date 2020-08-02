@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test1"></div>
+<div id="test2"></div>
+<script type="text/javascript" src="../js/old/react.development.js"></script>
+<script type="text/javascript" src="../js/old/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/old/babel.min.js"></script>
+<script type="text/babel">
+    function MyComponent() {
+        return <h2>MyComponent</h2>
+    }
+
+    class MyComponent2 extends React.Component {
+        render() {
+            return <h2>MyComponent2</h2>
+        }
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById("test1"));
+    ReactDOM.render(<MyComponent2/>, document.getElementById("test2"));
+</script>
+</body>
+</html>
